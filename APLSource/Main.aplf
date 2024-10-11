@@ -1,19 +1,14 @@
- Main;Model;Hamming
- ⍝ preparing data
- Path←'/Users/j/Downloads/iris.csv'
- Data←⊃⎕CSV Path''(2 2 2 2 1)1
- Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
- ⍝ training
- (Tr V Ts)←Data Split 8 1 1
- Model←Euclidean KNN Tr
- ⍝ validation
- (Xv Yv)←Xy V
- Ks←¯1+2×⍳8
- Val←Ks∘.Model↓Xv
- Hamming←+/≠
- Ham←(⊂,Yv)Hamming¨↓Val ⍝ Need to automate choosing K
- ⍝ test
- (Xt Yt)←Xy Ts
- Model←5∘Model
- Ham←(,Yt)Hamming Model¨↓Xt
- Ham÷≢Yt
+Res←Main;Model;Hamming
+⍝ preparing data
+Path←'/Users/j/Downloads/iris.csv'
+Data←⊃⎕CSV Path''(2 2 2 2 1)1
+Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
+(Tr Ts)←Data Split 8 2
+⍝ training
+Model←Euclidean KNN Tr
+⍝ test
+(Xt yt)←Xy Ts
+Ks←1 5 100
+Val←Ks∘.Model↓Xt
+Ham←(⊂yt)(+/≠)¨↓Val
+Res←↑Ks{⍺⍵}¨1-Ham÷≢Xt
