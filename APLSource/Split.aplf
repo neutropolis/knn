@@ -1,6 +1,0 @@
- Split←{
-     Set←⍺
-     Parts←(Sz←≢⍺)×⍵÷+/⍵    ⍝ Get size of each partition
-     Rand←(Parts\⍳≢⍵)⊆Sz?Sz ⍝ Get random indexes for each part
-     {Set[⍵;]}¨Rand        ⍝ Splits data given random indexes
- }
