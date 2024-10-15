@@ -1,12 +1,12 @@
- Res←Main;Model;Hamming
-⍝ preparing data
+ Res←Main;Model
+ ⍝ preparing data
  Path←'/home/neutropolis/Downloads/iris.csv'
  Data←⊃⎕CSV Path''(2 2 2 2 1)1
  Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
- (Tr Ts)←Data ?⍨Split 8 2
-⍝ training
+ (Tr Ts)←Data(?⍨Split 0)8 2
+ ⍝ training
  Model←Euclidean KNN Tr
-⍝ test
+ ⍝ test
  (Xt yt)←Xy Ts
  Ks←1 5 100
  Val←Ks∘.Model↓Xt
