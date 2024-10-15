@@ -1,0 +1,6 @@
+ Split←{
+     Set←⍺
+     Parts←(Sz←≢⍺)×⍵÷+/⍵
+     Rand←(Parts\⍳≢⍵)⊆⍺⍺Sz
+     {Set[⍵;]}¨Rand
+ }
