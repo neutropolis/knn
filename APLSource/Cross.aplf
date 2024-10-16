@@ -1,0 +1,4 @@
+ Cross←{
+     Folds←(⍵-1)⌽⍺
+     Ks Predict(↑⍪⌿1↓Folds)(⊢⌿↑1↑Folds)
+ }

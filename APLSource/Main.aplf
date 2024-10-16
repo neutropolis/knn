@@ -1,14 +1,11 @@
-Res←Main;Model;Hamming
-⍝ preparing data
-Path←'/Users/j/Downloads/iris.csv'
-Data←⊃⎕CSV Path''(2 2 2 2 1)1
-Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
-(Tr Ts)←Data Split 8 2
-⍝ training
-Model←Euclidean KNN Tr
-⍝ test
-(Xt yt)←Xy Ts
-Ks←1 5 100
-Val←Ks∘.Model↓Xt
-Ham←(⊂yt)(+/≠)¨↓Val
-Res←↑Ks{⍺⍵}¨1-Ham÷≢Xt
+ Res←Main Path;Model;RanStr
+ Data←⊃⎕CSV Path''(2 2 2 2 1)1
+ Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
+ RanStr←?⍨Split 1
+ (Tr Ts)←Data RanStr 7 3
+ Ks←¯1+2×⍳20
+ N←5
+ Folds←Tr RanStr N⍴1
+ K←Ks[⊃⍒↑+/Folds∘Cross¨⍳N]
+ ⎕←'cross validation k: ',⍕K
+ Res←K Predict Tr Ts

@@ -1,0 +1,7 @@
+Split←{
+    ⍵⍵:⍪⌿(⍺⍺∇∇0∘⍵⍤2)⍺[⊢⌸,¯1↑[2]⍺;]
+    Parts←(Sz←≢⍺)×⍵÷+/⍵
+    Adj←Pre,Sz-+/Pre←¯1↓⌊Parts
+    Rand←(Adj\⍳≢⍵)⊆⍺⍺ Sz
+    Set←⍺⋄{Set[⍵;]}¨Rand
+}
