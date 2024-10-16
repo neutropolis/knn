@@ -1,0 +1,8 @@
+ Predict←{
+     (Tr Ts)←⍵
+     Model←Euclidean KNN Tr
+     (Xt yt)←Xy Ts
+     Val←⍺∘.Model↓Xt
+     Ham←(⊂yt)(+/≠)¨↓Val
+     1-Ham÷≢Xt
+ }

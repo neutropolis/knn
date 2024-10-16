@@ -1,18 +1,11 @@
- Res←Main;Model
- ⍝ preparing data
- Path←'/home/neutropolis/Downloads/iris.csv'
+ Res←Main Path;Model;RanStr
  Data←⊃⎕CSV Path''(2 2 2 2 1)1
  Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
- (Tr Ts)←Data(?⍨Split 1)7 3
- ⍝ 5-fold cross validation
+ RanStr←?⍨Split 1
+ (Tr Ts)←Data RanStr 7 3
  Ks←¯1+2×⍳20
  N←5
- Folds←Tr(?⍨Split 1)N⍴1
- Model←Euclidean KNN Tr
+ Folds←Tr RanStr N⍴1
  K←Ks[⊃⍒↑+/Folds∘Cross¨⍳N]
  ⎕←'cross validation k: ',⍕K
- ⍝ test
- (Xt yt)←Xy Ts
- Val←K∘.Model↓Xt
- Ham←(⊂yt)(+/≠)¨↓Val
- Res←1-Ham÷≢Xt
+ Res←K Predict Tr Ts
