@@ -1,0 +1,9 @@
+ Cross←{
+     Folds←(⍵-1)⌽⍺
+     (Tr Ts)←(↑⍪⌿1↓Folds)(⊢⌿↑1↑Folds)
+     Model←Euclidean KNN Tr
+     (Xt yt)←Xy Ts
+     Val←Ks∘.Model↓Xt
+     Ham←(⊂yt)(+/≠)¨↓Val
+     1-Ham÷≢Xt
+ }

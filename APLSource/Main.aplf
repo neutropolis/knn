@@ -3,12 +3,16 @@
  Path←'/home/neutropolis/Downloads/iris.csv'
  Data←⊃⎕CSV Path''(2 2 2 2 1)1
  Data[;Lst]←(∪⍳⊢)Data[;Lst←⊃⌽⍴Data]
- (Tr Ts)←Data(?⍨Split 0)8 2
- ⍝ training
+ (Tr Ts)←Data(?⍨Split 1)7 3
+ ⍝ 5-fold cross validation
+ Ks←¯1+2×⍳20
+ N←5
+ Folds←Tr(?⍨Split 1)N⍴1
  Model←Euclidean KNN Tr
+ K←Ks[⊃⍒↑+/Folds∘Cross¨⍳N]
+ ⎕←'cross validation k: ',⍕K
  ⍝ test
  (Xt yt)←Xy Ts
- Ks←1 5 100
- Val←Ks∘.Model↓Xt
+ Val←K∘.Model↓Xt
  Ham←(⊂yt)(+/≠)¨↓Val
- Res←↑Ks{⍺ ⍵}¨1-Ham÷≢Xt
+ Res←1-Ham÷≢Xt
