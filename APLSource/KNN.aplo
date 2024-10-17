@@ -1,6 +1,6 @@
  KNN←{
-     (X y)←Xy ⍵⍵
-     Min←⍺↑⍋(↓X)⍺⍺¨⊂⍵
-     Pol←{(≢⍵)⍺}⌸y∘{⍺[⍵]}¨Min
-     ⊃⌽∊{(⊃⍺)>⊃⍵:⍺ ⋄ ⍵}/↓Pol
+     (X y)←Xy ⍵⍵               ⍝ input-output variables
+     min←⍺↑⍋(↓X)⍺⍺¨⊂⍵          ⍝ positions of k-closest neighbours
+     votes←{(≢⍵)⍺}⌸y⌷⍨⊂min     ⍝ votes for each class
+     ⊃⌽∊{(⊃⍺)>⊃⍵:⍺ ⋄ ⍵}/↓votes ⍝ return most voted class
  }

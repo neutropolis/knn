@@ -1,4 +1,5 @@
  Cross←{
-     Folds←(⍵-1)⌽⍺
-     Ks Predict(↑⍪⌿1↓Folds)(⊢⌿↑1↑Folds)
+     folds←(⍵-1)⌽⍺                    ⍝ ts tr1 tr2 ... tr(n-1)
+     Model←Euclidean KNN (↑⍪⌿1↓folds) ⍝ model with tr folds
+     {⍵∘Model Accuracy ⊢⌿↑1↑folds}¨ks ⍝ accuracy for ts & each ks
  }
