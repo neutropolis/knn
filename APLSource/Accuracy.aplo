@@ -1,0 +1,6 @@
+ Accuracy←{
+     (Xt yt)←Xy ⍵        ⍝ input-output variables for test
+     val←⍺⍺¨↓Xt          ⍝ predict for each test record
+     ham←(⊂yt)(+/≠)¨↓val ⍝ calculate hamming distance
+     1-ham÷≢Xt           ⍝ return accuracy
+ }

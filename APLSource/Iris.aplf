@@ -1,0 +1,13 @@
+ res←Iris;Model;RanStr
+ path←'/Users/j/Downloads/iris.csv'
+ data←⊃⎕CSV path''(2 2 2 2 1)1        ⍝ load iris dataset
+ data[;last]←(∪⍳⊢)data[;last←⊃⌽⍴data] ⍝ 'symbolize' output values
+ RanStr←?⍨Split 1                     ⍝ split: random, stratify
+ (tr ts)←data RanStr 7 3              ⍝ 70% training, 30% test
+ ks←¯1+2×⍳20                          ⍝ all possible k values
+ n←5                                  ⍝ cross-validation with n folds
+ folds←tr RanStr n⍴1                  ⍝ calculate n folds from training data
+ k←ks[⊃⍒↑+/folds∘Cross¨⍳n]            ⍝ cross-validation -> final k
+ ⎕←'cross validation k: ',⍕k
+ Model←k∘(Euclidean KNN tr)           ⍝ builds final 'model'
+ res←Model Accuracy ts                ⍝ determines accuracy for test set
